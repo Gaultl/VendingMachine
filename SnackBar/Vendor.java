@@ -79,9 +79,12 @@ public class Vendor
         if(getStock() >= 1 && getDeposit() >= price){
             setStock(stock-1);
             change = (getDeposit() - price);
+            totalSales += price/100.0;
+            deposit = 0;
             return true;
         } else {
             change = getDeposit();
+            deposit = 0;
             return false;
         }
     }
@@ -105,9 +108,9 @@ public class Vendor
         note that the coin class has a .getQuarters(), a .getDimes() etc etc (use the coin class!)
         */
 
-        Coins totalChange = new Coins(getChange());
+        Coins totalChange = new Coins(change);
 
-        String changeString="";
+        String changeString = totalChange.getQuarters() + "q + " + totalChange.getDimes() + "d + " + totalChange.getNickles() + "n + " + totalChange.getPennies() + "p";
 
         return changeString;
     }
@@ -120,6 +123,8 @@ public class Vendor
     */
     public static double getTotalSales()
     {
-        //complete this
+        double sales = totalSales;
+        totalSales = 0;
+        return sales;
     }
 }
